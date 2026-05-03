@@ -64,8 +64,8 @@ const Tasks = () => {
       const config = { headers: { Authorization: `Bearer ${token}` } };
       
       const [tasksRes, projectsRes] = await Promise.all([
-        axios.get('https://team-task-manager-seven-woad.vercel.app//api/tasks', config),
-        axios.get('https://team-task-manager-seven-woad.vercel.app//api/projects', config)
+        axios.get('https://team-task-manager-seven-woad.vercel.app/api/tasks', config),
+        axios.get('https://team-task-manager-seven-woad.vercel.app/api/projects', config)
       ]);
       
       setTasks(tasksRes.data);
@@ -81,7 +81,7 @@ const Tasks = () => {
       
       // Only fetch users if Admin
       if (currentUser.role === 'Admin') {
-        const usersRes = await axios.get('https://team-task-manager-seven-woad.vercel.app//api/users', config);
+        const usersRes = await axios.get('https://team-task-manager-seven-woad.vercel.app/api/users', config);
         setUsers(usersRes.data);
       }
     } catch (error) {
@@ -159,7 +159,7 @@ const Tasks = () => {
     
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post('https://team-task-manager-seven-woad.vercel.app//api/tasks', taskData, {
+      const response = await axios.post('https://team-task-manager-seven-woad.vercel.app/api/tasks', taskData, {
         headers: { Authorization: `Bearer ${token}` }
       });
       
@@ -187,7 +187,7 @@ const Tasks = () => {
   const updateTaskStatus = async (taskId, newStatus) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.patch(`https://team-task-manager-seven-woad.vercel.app//api/tasks/${taskId}/status`, 
+      await axios.patch(`https://team-task-manager-seven-woad.vercel.app/api/tasks/${taskId}/status`, 
         { status: newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -202,7 +202,7 @@ const Tasks = () => {
     if (window.confirm('Are you sure you want to delete this task?')) {
       try {
         const token = localStorage.getItem('token');
-        await axios.delete(`https://team-task-manager-seven-woad.vercel.app//api/tasks/${taskId}`, {
+        await axios.delete(`https://team-task-manager-seven-woad.vercel.app/api/tasks/${taskId}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         toast.success('Task deleted successfully');
